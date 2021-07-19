@@ -11,10 +11,10 @@ ___INFO___
 {
   "type": "TAG",
   "id": "cvt_temp_public_id",
-  "version": 1,
+  "version": 2,
   "securityGroups": [],
   "displayName": "Sfbx - AppConsent CMP - Default Consent Mode",
-     "categories": [
+  "categories": [
     "UTILITY",
     "ANALYTICS",
     "ADVERTISING"
@@ -37,8 +37,7 @@ ___TEMPLATE_PARAMETERS___
   {
     "type": "SELECT",
     "name": "command",
-    "displayName": "Consent GCM Command",
-    "macrosInSelect": true,
+    "displayName": "Consent Command",
     "selectItems": [
       {
         "value": "default",
@@ -50,6 +49,7 @@ ___TEMPLATE_PARAMETERS___
       }
     ],
     "simpleValueType": true,
+    "help": "\u003cstrong\u003eDefault\u003c/strong\u003e means that you establish consent settings the site falls back on until such a time that the Update command is executed. \u003cstrong\u003eUpdate\u003c/strong\u003e is what you\u0027d use once you\u0027ve retrieved a consent status from the user.",
     "defaultValue": "default",
     "alwaysInSummary": true
   },
@@ -66,8 +66,8 @@ ___TEMPLATE_PARAMETERS___
           {
             "param": {
               "type": "SELECT",
-              "name": "ad_strorage",
-              "displayName": "Advertising Marketing Purposes",
+              "name": "ad_storage",
+              "displayName": "Advertising",
               "macrosInSelect": true,
               "selectItems": [
                 {
@@ -80,7 +80,8 @@ ___TEMPLATE_PARAMETERS___
                 }
               ],
               "simpleValueType": true,
-              "defaultValue": "denied"
+              "defaultValue": "denied",
+              "help": "If set to \u003cstrong\u003edenied\u003c/strong\u003e, Google\u0027s advertising tags and pixels will not be able to read or write first-party cookies. The use of third-party cookies is limited to only spam and fraud detection purposes. \u003ca href\u003d\"https://support.google.com/analytics/answer/9976101#behavior\"\u003eMore information\u003c/a\u003e"
             },
             "isUnique": false
           },
@@ -101,7 +102,8 @@ ___TEMPLATE_PARAMETERS___
                 }
               ],
               "simpleValueType": true,
-              "defaultValue": "denied"
+              "defaultValue": "denied",
+              "help": "If set to \u003cstrong\u003edenied\u003c/strong\u003e, Google Analytics tags will not read or write the first-party cookie, and data collected to Google Analytics will not utilize persistent cookie identifiers (the identifiers are reset with every page load). \u003ca href\u003d\"https://support.google.com/analytics/answer/9976101#behavior\"\u003eMore information\u003c/a\u003e."
             },
             "isUnique": false
           },
@@ -109,9 +111,11 @@ ___TEMPLATE_PARAMETERS___
             "param": {
               "type": "TEXT",
               "name": "wait_for_update",
+              "displayName": "Wait for Update",
               "simpleValueType": true,
+              "valueUnit": "milliseconds",
               "defaultValue": 500,
-              "displayName": "Wait for Update"
+              "help": "How long to wait (in milliseconds) for an \u003cstrong\u003eUpdate\u003c/strong\u003e command before firing Google tags that have been queued up."
             },
             "isUnique": false
           },
@@ -121,20 +125,22 @@ ___TEMPLATE_PARAMETERS___
               "name": "regions",
               "displayName": "Regions",
               "simpleValueType": true,
-              "defaultValue": "all"
+              "defaultValue": "all",
+              "help": "Apply this setting to users from these \u003ca href\u003d\"https://en.wikipedia.org/wiki/ISO_3166-2\"\u003eregions\u003c/a\u003e (provide a comma-separated list). If you select \u003cstrong\u003eall\u003c/strong\u003e, the setting will apply to all users."
             },
             "isUnique": false
           }
         ],
-        "editRowTitle": "Edit Setting",
         "newRowButtonText": "Add Setting",
+        "editRowTitle": "Edit Setting",
         "newRowTitle": "Add Setting",
         "valueValidators": [
           {
-            "type": "STRING_LENGTH",
+            "type": "TABLE_ROW_COUNT",
             "args": [
               1
-            ]
+            ],
+            "errorMessage": "You must add at least one default setting."
           }
         ]
       }
@@ -156,7 +162,7 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "SELECT",
         "name": "update_ad_storage",
-        "displayName": "Advertising \u0026 Marketing",
+        "displayName": "Advertising",
         "macrosInSelect": true,
         "selectItems": [
           {
@@ -169,7 +175,8 @@ ___TEMPLATE_PARAMETERS___
           }
         ],
         "simpleValueType": true,
-        "defaultValue": "denied"
+        "defaultValue": "granted",
+        "help": "If set to \u003cstrong\u003edenied\u003c/strong\u003e, Google\u0027s advertising tags and pixels will not be able to read or write first-party cookies. The use of third-party cookies is limited to only spam and fraud detection purposes. \u003ca href\u003d\"https://support.google.com/analytics/answer/9976101#behavior\"\u003eMore information\u003c/a\u003e."
       },
       {
         "type": "SELECT",
@@ -187,7 +194,8 @@ ___TEMPLATE_PARAMETERS___
           }
         ],
         "simpleValueType": true,
-        "defaultValue": "denied"
+        "defaultValue": "granted",
+        "help": "If set to \u003cstrong\u003edenied\u003c/strong\u003e, Google Analytics tags will not read or write analytics cookies, and data collected to Google Analytics will not utilize persistent cookie identifiers (the identifiers are reset with every page load). \u003ca href\u003d\"https://support.google.com/analytics/answer/9976101#behavior\"\u003eMore information\u003c/a\u003e."
       }
     ],
     "enablingConditions": [
@@ -201,7 +209,7 @@ ___TEMPLATE_PARAMETERS___
   {
     "type": "GROUP",
     "name": "extra",
-    "displayName": "Extra settings",
+    "displayName": "Other Settings",
     "groupStyle": "ZIPPY_OPEN",
     "subParams": [
       {
