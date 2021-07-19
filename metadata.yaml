@@ -1,5 +1,5 @@
 homepage: "https://www.sfbx.io"
 documentation: "https://sfbx.gitbook.io/appconsent/"
 versions:
-  - sha: e01530fe516ab44b5e8d174bcb852ee953eeaafd
-    changeNotes: Initial release.
+  - sha: 67b62834d008a46026724e7f66ff16c9e51cd5a0
+    changeNotes: Initial release / Minor changes.
